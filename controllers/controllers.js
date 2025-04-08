@@ -73,6 +73,11 @@ export async function deleteFlower(req, res) {
   const { id } = req.params;
 
   const flowerIndex = flowers.findIndex((flower) => flower.id === Number(id));
+
+  if (flowerIndex === -1) {
+    return res.status(404).json({ message: "Flower not found" });
+  }
+
   flowers.splice(flowerIndex, 1);
 
   res.status(200).json({
